@@ -3,8 +3,9 @@ spring:
     name: cafeteria-backend
 
   datasource:
-    # URL de Neon con usuario y contraseña incluidos
-    url: jdbc:postgresql://ep-bold-fire-bdsjvy17.c-8.us-east-2.aws.neon.tech/cafeteria_db?user=cafeteria_db_owner&password=npg_mXwqt2fC7Jra&sslmode=require
+    url: jdbc:postgresql://localhost:5432/cafeteria_db
+    username: cafeteria_user
+    password: supersecret123
     driver-class-name: org.postgresql.Driver
 
   jpa:
