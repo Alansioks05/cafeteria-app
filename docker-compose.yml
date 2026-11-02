@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: cafeteria_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-cafeteria_db}
+      POSTGRES_USER: ${POSTGRES_USER:-cafeteria_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-supersecret123}
+      TZ: America/Bogota
+      PGTZ: America/Bogota
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - cafeteria_pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cafeteria_user} -d ${POSTGRES_DB:-cafeteria_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - cafeteria_net
+
+  adminer:
+    image: adminer:latest
+    container_name: cafeteria_adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - cafeteria_net
+
+volumes:
+  cafeteria_pgdata:
+    name: cafeteria_pgdata
+
+networks:
+  cafeteria_net:
+    name: cafeteria_net
