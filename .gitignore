@@ -1,0 +1,22 @@
+# Variables y secretos
+.env
+.env.*
+!.env.example
+
+# Java / Spring Boot
+**/target/
+**/build/
+
+# Node / React
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# Archivos del sistema y editores
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
