@@ -1,3 +1,4 @@
+
 package com.cafeteria.config;
 
 import io.jsonwebtoken.Jwts;
@@ -45,6 +46,13 @@ public class JwtUtil {
     public String extractUsername(String token) {
         return Jwts.parser().verifyWith(key).build()
                 .parseSignedClaims(token).getPayload().getSubject();
+    }
+
+    public List<String> extractRoles(String token) {
+        return Jwts.parser().verifyWith(key).build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("roles", List.class);
     }
 
     public boolean validateToken(String token) {

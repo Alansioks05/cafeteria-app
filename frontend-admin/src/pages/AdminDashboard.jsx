@@ -29,7 +29,7 @@ export default function AdminDashboard() {
     cargarStats();
 
     // WebSocket para actualizar estadísticas en tiempo real
-    const socket = new SockJS('http://localhost:8080/ws-cafeteria');
+    const socket = new SockJS('https://cafeteria-backend-618b.onrender.com/ws-cafeteria');
     const stompClient = new Client({ webSocketFactory: () => socket });
     stompClient.onConnect = () => {
       stompClient.subscribe('/topic/pedidos/estado', () => {
