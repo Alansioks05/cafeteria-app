@@ -1,3 +1,4 @@
+
 package com.cafeteria.config;
 
 import com.cafeteria.auth.UserDetailsServiceImpl;
@@ -53,9 +54,14 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
                 "http://localhost:5174",
-                "http://localhost:5175", // <-- NUEVO PUERTO PARA LA APP ADMIN
+                "http://localhost:5175",
                 "http://localhost:4173",
-                "http://localhost:4174"
+                "http://localhost:4174",
+
+                // Frontends publicados en Vercel
+                "https://cafeteria-admin-pearl.vercel.app",
+                "https://cafeteria-kds.vercel.app",
+                "https://cafeteria-app-pearl.vercel.app"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
